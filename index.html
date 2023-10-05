@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
   </head>
   <body>
     <h1 class="borders">Cookie Clicker!</h1>
-    <script src="script.js"></script>
     <div id="flexContainer">
       <div id="cookieDiv" class="borders">
         <div id="cookieInfo">
@@ -25,13 +25,7 @@
       </div>
       <div id="shop" class="borders">
         <div class="titles">Shop</div>
-        <div class="flexContainer">
-          <button class="shopItem">
-            <img class="shopImage" src="images/rollingPin.png" alt="" />
-            Granny <br />
-            5 Cookies
-          </button>
-        </div>
+        <div id="shop-items-container" class="flexContainer"></div>
       </div>
     </div>
   </body>

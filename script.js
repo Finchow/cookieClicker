@@ -58,16 +58,44 @@ function showWorkerInfo() {
 
 function displayShopItems() {
   let outputButtons = [];
-  for (let shopItem in workerObjects) {
+
+  for (let shopItem of workerObjects) {
+    // Every button contains
+    // - an image
+    // - name & price
+
+    const image = document.createElement("img");
+    image.src = shopItem.image;
+    image.className = "shopImage";
+
+    const itemDescription = document.createElement("div");
+    itemDescription.appendChild(document.createTextNode(shopItem.name));
+    itemDescription.appendChild(document.createElement("br"));
+    itemDescription.appendChild(
+      document.createTextNode(`${shopItem.price} Cookies`)
+    );
+
+    const shopItemButton = document.createElement("button");
+    shopItemButton.className = "shopItem";
+    shopItemButton.appendChild(image);
+    shopItemButton.appendChild(itemDescription);
+
+    shopItemButton.addEventListener("click", () => buyShopItem(shopItem));
+
+    // For each button, we then need to add it to the shop div
+    const shopItemsContainer = document.getElementById("shop-items-container");
+    shopItemsContainer.appendChild(shopItemButton);
   }
 }
 
-function buyShopItem(name, price) {}
+function buyShopItem(shopItem) {}
 
 for (let worker of workerStats) {
-  let [name, cps, price] = worker;
-  let newWorker = new workers(name, cps, price);
+  let [name, cps, price, image] = worker;
+  let newWorker = new workers(name, cps, price, image);
   workerObjects.push(newWorker);
 }
+
+displayShopItems();
 
 setInterval(addCookies, 1000);
