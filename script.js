@@ -4,16 +4,16 @@ let cps = 1;
 let workerObjects = [];
 
 const workerStats = [
-  // [name, cps, price]
-  ["Clicker", 1, 5],
-  ["Granny", 5, 30],
-  ["Farm", 15, 100],
-  ["Factory", 25, 500],
-  ["Cookie Rig", 35, 1500],
+  // [name, cps, price, image path or url]
+  ["Clicker", 1, 5, "images/clicker.png"],
+  ["Granny", 5, 30, "images/rollingPin.png"],
+  ["Farm", 15, 100, "images/farm.webp"],
+  ["Factory", 25, 500, "images/factory.jpg"],
+  ["Cookie Rig", 35, 1500, "images/rig.jpg"],
 ];
 
 class workers {
-  constructor(name, cps, price) {
+  constructor(name, cps, price, image) {
     if (name === "Clicker") {
       this.quantity = 1;
     } else {
@@ -22,6 +22,7 @@ class workers {
     this.name = name;
     this.cps = cps;
     this.price = price;
+    this.image = image;
   }
 }
 
@@ -55,7 +56,13 @@ function showWorkerInfo() {
   }
 }
 
-function displayShopItems() {}
+function displayShopItems() {
+  let outputButtons = [];
+  for (let shopItem in workerObjects) {
+  }
+}
+
+function buyShopItem(name, price) {}
 
 for (let worker of workerStats) {
   let [name, cps, price] = worker;
