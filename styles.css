@@ -85,6 +85,10 @@ button{
     background-color: aliceblue;
 }
 
+.shopItem:active{
+    transform: scale(95%);
+}
+
 .shopImage {
     width: 10vh;
     height: 10vh;
@@ -96,6 +100,7 @@ button{
 #red-border{
     border-color: red;
 }
+
 
 .cookie:active{
     transform: scale(95%);
