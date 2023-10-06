@@ -96,3 +96,7 @@ button{
 #red-border{
     border-color: red;
 }
+
+.cookie:active{
+    transform: scale(95%);
+}
