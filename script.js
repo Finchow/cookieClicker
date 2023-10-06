@@ -8,9 +8,9 @@ const workerStats = [
   ["Clicker", 1, 25, "images/clicker.png"],
   ["Grandma", 5, 200, "images/rollingPin.png"],
   ["Farm", 15, 700, "images/farm.webp"],
-  ["Mine", 25, 1400, "images/mine.jpg"],
-  ["Factory", 35, 2000, "images/factory.jpg"],
-  ["Cookie Rig", 45, 10000, "images/rig.jpg"],
+  ["Mine", 25, 1800, "images/mine.jpg"],
+  ["Factory", 35, 5000, "images/factory.jpg"],
+  ["Cookie Rig", 100, 40000, "images/rig.jpg"],
 ];
 
 class workers {
@@ -23,16 +23,21 @@ class workers {
   }
 }
 
-function clickHandler() {
-  cookies++;
+function update() {
   showCookieInfo();
   showWorkerInfo();
+  clearShopItems();
+  showShopItems();
+}
+
+function clickHandler() {
+  cookies++;
+  update();
 }
 
 function addCookies() {
   cookies += Math.ceil(cps / 4);
-  showCookieInfo();
-  showWorkerInfo();
+  update();
 }
 
 function showCookieInfo() {
@@ -59,14 +64,10 @@ function showWorkerInfo() {
   }
 }
 
-function displayShopItems() {
+function showShopItems() {
   let outputButtons = [];
 
   for (let shopItem of workerObjects) {
-    // Every button contains
-    // - an image
-    // - name & price
-
     const image = document.createElement("img");
     image.src = shopItem.image;
     image.className = "shopImage";
@@ -79,16 +80,23 @@ function displayShopItems() {
     );
 
     const shopItemButton = document.createElement("button");
+    if (cookies < shopItem.price) {
+      shopItemButton.id = "red-border";
+    }
     shopItemButton.className = "shopItem";
     shopItemButton.appendChild(image);
     shopItemButton.appendChild(itemDescription);
 
     shopItemButton.addEventListener("click", () => buyShopItem(shopItem));
 
-    // For each button, we then need to add it to the shop div
     const shopItemsContainer = document.getElementById("shop-items-container");
     shopItemsContainer.appendChild(shopItemButton);
   }
+}
+
+function clearShopItems() {
+  const shopItemsContainer = document.getElementById("shop-items-container");
+  shopItemsContainer.innerHTML = "";
 }
 
 function buyShopItem(shopItem) {
@@ -106,7 +114,5 @@ for (let worker of workerStats) {
   let newWorker = new workers(name, cps, price, image);
   workerObjects.push(newWorker);
 }
-
-displayShopItems();
 
 setInterval(addCookies, 250);
