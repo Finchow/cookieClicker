@@ -1,24 +1,21 @@
 let cookies = 0;
-let cps = 1;
+let cps = 0;
 
 let workerObjects = [];
 
 const workerStats = [
   // [name, cps, price, image path or url]
-  ["Clicker", 1, 5, "images/clicker.png"],
-  ["Granny", 5, 30, "images/rollingPin.png"],
-  ["Farm", 15, 100, "images/farm.webp"],
-  ["Factory", 25, 500, "images/factory.jpg"],
-  ["Cookie Rig", 35, 1500, "images/rig.jpg"],
+  ["Clicker", 1, 25, "images/clicker.png"],
+  ["Grandma", 5, 200, "images/rollingPin.png"],
+  ["Farm", 15, 700, "images/farm.webp"],
+  ["Mine", 25, 1400, "images/mine.jpg"],
+  ["Factory", 35, 2000, "images/factory.jpg"],
+  ["Cookie Rig", 45, 10000, "images/rig.jpg"],
 ];
 
 class workers {
   constructor(name, cps, price, image) {
-    if (name === "Clicker") {
-      this.quantity = 1;
-    } else {
-      this.quantity = 0;
-    }
+    this.quantity = 0;
     this.name = name;
     this.cps = cps;
     this.price = price;
@@ -26,8 +23,14 @@ class workers {
   }
 }
 
+function clickHandler() {
+  cookies++;
+  showCookieInfo();
+  showWorkerInfo();
+}
+
 function addCookies() {
-  cookies += cps;
+  cookies += Math.ceil(cps / 4);
   showCookieInfo();
   showWorkerInfo();
 }
@@ -88,7 +91,15 @@ function displayShopItems() {
   }
 }
 
-function buyShopItem(shopItem) {}
+function buyShopItem(shopItem) {
+  if (cookies >= shopItem.price) {
+    cookies -= shopItem.price;
+    shopItem.quantity++;
+    cps += shopItem.cps;
+  } else {
+    alert("Not enough Cookies");
+  }
+}
 
 for (let worker of workerStats) {
   let [name, cps, price, image] = worker;
@@ -98,4 +109,4 @@ for (let worker of workerStats) {
 
 displayShopItems();
 
-setInterval(addCookies, 1000);
+setInterval(addCookies, 250);
