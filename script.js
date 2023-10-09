@@ -10,7 +10,10 @@ const workerStats = [
   ["Farm", 15, 700, "images/farm.webp"],
   ["Mine", 25, 1800, "images/mine.jpg"],
   ["Factory", 35, 5000, "images/factory.jpg"],
-  ["Cookie Rig", 100, 40000, "images/rig.jpg"],
+  ["Cookie Rig", 75, 40000, "images/rig.jpg"],
+  ["Bank", 250, 8000, "images/bank.jpg"],
+  ["Temple", 500, 12000, "images/temple.jpg"],
+  ["Lab", 750, 20000, "images/lab.png"],
 ];
 
 class workers {
@@ -26,8 +29,7 @@ class workers {
 function update() {
   showCookieInfo();
   showWorkerInfo();
-  clearShopItems();
-  showShopItems();
+  updateShopItems();
 }
 
 function clickHandler() {
@@ -36,13 +38,13 @@ function clickHandler() {
 }
 
 function addCookies() {
-  cookies += Math.ceil(cps / 4);
+  cookies += cps / 4;
   update();
 }
 
 function showCookieInfo() {
   document.getElementById("totalCookies").textContent =
-    "Total Cookies: " + String(cookies);
+    "Total Cookies: " + Math.ceil(String(cookies));
   document.getElementById("cps").textContent = "cps: " + String(cps);
 }
 
@@ -80,9 +82,8 @@ function showShopItems() {
     );
 
     const shopItemButton = document.createElement("button");
-    if (cookies < shopItem.price) {
-      shopItemButton.id = "red-border";
-    }
+
+    shopItemButton.id = shopItem.name;
     shopItemButton.className = "shopItem";
     shopItemButton.appendChild(image);
     shopItemButton.appendChild(itemDescription);
@@ -94,9 +95,15 @@ function showShopItems() {
   }
 }
 
-function clearShopItems() {
-  const shopItemsContainer = document.getElementById("shop-items-container");
-  shopItemsContainer.innerHTML = "";
+function updateShopItems() {
+  for (let shopItem of workerObjects) {
+    const shopItemButton = document.getElementById(shopItem.name);
+    if (cookies < shopItem.price) {
+      shopItemButton.className = "shopItem red-border";
+    } else {
+      shopItemButton.className = "shopItem";
+    }
+  }
 }
 
 function buyShopItem(shopItem) {
@@ -114,5 +121,7 @@ for (let worker of workerStats) {
   let newWorker = new workers(name, cps, price, image);
   workerObjects.push(newWorker);
 }
+
+showShopItems();
 
 setInterval(addCookies, 250);
