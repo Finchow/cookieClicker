@@ -10,10 +10,10 @@ const workerStats = [
   ["Farm", 15, 700, "images/farm.webp"],
   ["Mine", 25, 1800, "images/mine.jpg"],
   ["Factory", 35, 5000, "images/factory.jpg"],
-  ["Cookie Rig", 75, 40000, "images/rig.jpg"],
-  ["Bank", 250, 8000, "images/bank.jpg"],
-  ["Temple", 500, 12000, "images/temple.jpg"],
-  ["Lab", 750, 20000, "images/lab.png"],
+  ["Cookie Rig", 75, 8000, "images/rig.jpg"],
+  ["Bank", 250, 12000, "images/bank.jpg"],
+  ["Temple", 500, 18000, "images/temple.jpg"],
+  ["Lab", 750, 24000, "images/lab.png"],
 ];
 
 class workers {
@@ -106,14 +106,22 @@ function updateShopItems() {
   }
 }
 
+function clearShopItems() {
+  const shopItemsContainer = document.getElementById("shop-items-container");
+  shopItemsContainer.innerHTML = "";
+}
+
 function buyShopItem(shopItem) {
   if (cookies >= shopItem.price) {
     cookies -= shopItem.price;
     shopItem.quantity++;
     cps += shopItem.cps;
+    shopItem.price = Math.ceil(shopItem.price * 1.2);
   } else {
     alert("Not enough Cookies");
   }
+  clearShopItems();
+  showShopItems();
 }
 
 for (let worker of workerStats) {
