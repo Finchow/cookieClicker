@@ -2,6 +2,14 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+input {
+  text-align: center;
+  font-size: 25px;
+  padding: 4px 0px;
+  cursor: pointer;
+  border: none;
+  background-color: bisque;
+}
 h1 {
   text-align: center;
   background-color: bisque;
