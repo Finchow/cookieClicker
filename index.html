@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
-  </head>
-  <body>
-    <h1 class="borders">Cookie Clicker!</h1>
-    <div id="flexContainer">
-      <div id="cookieDiv" class="borders">
-        <div id="cookieInfo">
-          <span id="totalCookies">Total Cookies: </span>
-          <span id="cps">cps: 0</span>
-        </div>
-        <button class="cookie" onclick="clickHandler()">
-          <img id="cookieImg" src="images/cookie.png" alt="" />
-        </button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Clicker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <h1 class="borders">Cookie Clicker!</h1>
+  <div id="flexContainer">
+    <div id="cookieDiv" class="borders">
+      <div id="cookieInfo">
+        <span id="totalCookies">Total Cookies: </span>
+        <span id="cps">cps: 0</span>
       </div>
-      <div id="workers" class="borders">
-        <div class="titles">Workers</div>
-        <div id="workerItems">
-          <div class="background"></div>
-        </div>
-      </div>
-      <div id="shop" class="borders">
-        <div class="titles">Shop</div>
-        <div id="shop-items-container" class="flexContainer"></div>
+      <button class="cookie" onclick="clickHandler()">
+        <img id="cookieImg" src="images/cookie.png" alt="" />
+      </button>
+    </div>
+    <div id="workers" class="borders">
+      <div class="titles">Workers</div>
+      <div id="workerItems">
+        <div class="background"></div>
       </div>
     </div>
-  </body>
+    <div id="shop" class="borders">
+      <div class="titles">Shop</div>
+      <div id="shop-items-container" class="flexContainer"></div>
+    </div>
+  </div>
+</body>
+
 </html>
